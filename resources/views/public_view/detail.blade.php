@@ -1,6 +1,9 @@
 @extends('public_view.master')
 @section('content')
 <div class="">
+    <div class="alert alert-dark">
+        Testing Commit
+    </div>
                 <div class="py-3">
 
                     <div class="small post-category mb-5">

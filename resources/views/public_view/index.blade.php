@@ -1,6 +1,7 @@
 @extends('public_view.master')
 @section('content')
 <div class="">
+    <div class="alert alert-danger">Testing Commit</div>
     @forelse($articles as $article)
 
     <div class="border-bottom  pb-4 article-preview">
