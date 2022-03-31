@@ -21,8 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/index',[BlogController::class, 'index'])->name('index');
-Route::get('/detail/{id}',[BlogController::class, 'detail'])->name('detail');
+Route::get('/blogs',[BlogController::class, 'index'])->name('index');
+Route::get('/detail/{slug}',[BlogController::class, 'detail'])->name('detail');
 Route::view('/about', 'public_view.about')->name('about');
 Route::get('/blogs_by_category/{id}', [BlogController::class, 'baseOnCategory'])->name('baseOnCategory');
 Auth::routes();
