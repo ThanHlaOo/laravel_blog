@@ -15,6 +15,7 @@ class AddColumnSlug extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->text('slug')->nullable()->after('title');
+            $table->text('excerpt')->nullable()->after('description');
         });
     }
 
