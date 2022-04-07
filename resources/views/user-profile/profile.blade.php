@@ -18,11 +18,22 @@
                         </h3>
                         <small class="text-black-50">
                             {{ Auth::user()->email }}
-                        </small>
-
+                        </small>                   
+                        <table class="table mb-0 mt-4 text-left">
+                            <tr>
+                                <td class="w-25">Phone</td>
+                                <td>{{ Auth::user()->phone }}</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>{{ Auth::user()->address }}</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 @endsection

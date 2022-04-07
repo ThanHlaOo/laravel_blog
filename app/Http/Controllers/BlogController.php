@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use Illuminate\Support\Str;
 class BlogController extends Controller
 {
     public function index()
     {   
+        // foreach(Article::all() as $article){
+            
+        //     $article->excerpt = Str::words($article->description,50);
+        //     $article->update();
+        // }
+        // return 'adding';
         $article = Article::when(isset(request()->search), function($query){
                         $key = request()->search;
                         $query->orwhere('title', 'LIKE', "%$key%")->orwhere('description', 'LIKE', "%$key%");
