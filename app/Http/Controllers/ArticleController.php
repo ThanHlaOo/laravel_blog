@@ -6,7 +6,7 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -15,8 +15,19 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function apiIndex(){
+        
+        $article = Article::when(isset(request()->search), function($query){
+            $key = request()->search;
+            $query->orwhere('title', 'LIKE', "%$key%")->orwhere('description', 'LIKE', "%$key%");
+        })->with(['user', 'category'])->latest()->paginate(7);
+
+        return $article;
+    }
     public function index()
-    {   $article = Article::when(isset(request()->search), function($query){
+    { 
+    
+        $article = Article::when(isset(request()->search), function($query){
                         $key = request()->search;
                         $query->orwhere('title', 'LIKE', "%$key%")->orwhere('description', 'LIKE', "%$key%");
                     })->with(['user', 'category'])->latest()->paginate(7);
@@ -53,8 +64,11 @@ class ArticleController extends Controller
 
         $article = new Article();
         $article->title = $request->title;
+        $article->slug = Str::slug($request->title)."-".uniqid();
         $article->category_id = $request->category;
         $article->description = $request->description;
+        $article->excerpt = Str::words($request->description,50);
+
         $article->user_id = Auth::id();
         $article->save();
 
@@ -68,7 +82,9 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Article $article)
-    {   $page = request()->page;
+    {   
+        
+        $page = request()->page;
         return view('article.show', compact('article', 'page'));
     }
 
@@ -100,10 +116,15 @@ class ArticleController extends Controller
 
 //                return $request;
 
-
+        if($article->title != $request->title){
+            $article->slug = Str::slug($request->title)."-".uniqid();
+        }
         $article->title = $request->title;
+       
         $article->category_id = $request->category;
         $article->description = $request->description;
+        $article->excerpt = Str::words($request->description,50);
+
         $article->update();
 
         return redirect()->route('articles.index')->with("message","New Article updated");

@@ -23,13 +23,17 @@
                         <x-menu.menu_-item link="{{route('categories.index')}}" icon="feather-layers" name="Manage Category" number="19"/>
             <x-menu.menu_-item name="Create Article" link="{{ route('articles.create') }}" icon="feather-plus-circle" ></x-menu.menu_-item>
             <x-menu.menu_-item name="Article List" link="{{ route('articles.index') }}" icon="feather-list" ></x-menu.menu_-item>
-
+                        @if(auth()->user()->role_id == 3)
                         <x-menu.menu_-spacer/>
-
+                        
+                        <x-menu.menu_-title title="User Manager"></x-menu.menu-title>
+                        <x-menu.menu_-item name="User Lists" icon="feather-users" link="{{ route('user-manager.index') }}"></x-menu.menu_-item>
+                        @endif
+                        <x-menu.menu_-spacer/>
                         <x-menu.menu_-title title="User Profile"></x-menu.menu-title>
                         <x-menu.menu_-item name="Your Profile" icon="feather-user" link="{{ route('profile') }}"></x-menu.menu_-item>
                         <x-menu.menu_-item name="Change Password" icon="feather-refresh-cw" link="{{ route('profile.edit.password') }}"></x-menu.menu_-item>
-                        <x-menu.menu_-item name="Update Name & Email" icon="feather-message-square" link="{{ route('profile.edit.name.email') }}"></x-menu.menu_-item>
+                        <x-menu.menu_-item name="Update Info" icon="feather-info" link="{{ route('profile.edit.name.email') }}"></x-menu.menu_-item>
                         <x-menu.menu_-item name="Update photo" icon="feather-image" link="{{ route('profile.edit.photo') }}"></x-menu.menu_-item>
                         <x-menu.menu_-spacer></x-menu.menu_-spacer>
 

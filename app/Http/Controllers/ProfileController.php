@@ -42,7 +42,7 @@ class ProfileController extends Controller
 
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('login')->with('toast', ['icon' => "success", "title"=> "user information is updated"]);;
 
     }
 
@@ -53,7 +53,7 @@ class ProfileController extends Controller
         $user = User::find(Auth::id());
         $user->name = $request->name;
         $user->update();
-        return redirect()->route("profile.edit.name.email");
+        return redirect()->route("profile.edit.name.email")->with('toast', ['icon' => "success", "title"=> "user information is updated"]);;
     }
 
     public function changeEmail(Request $request){
@@ -63,7 +63,7 @@ class ProfileController extends Controller
         $user = User::find(Auth::id());
         $user->email = $request->email;
         $user->update();
-        return redirect()->route("profile.edit.name.email");
+        return redirect()->route("profile.edit.name.email")->with('toast', ['icon' => "success", "title"=> "user information is updated"]);;
     }
 
     public function changePhoto(Request $request){
@@ -81,8 +81,24 @@ class ProfileController extends Controller
         $user->photo = $newName;
         $user->update();
 
-        return redirect()->route("profile.edit.photo");
+        return redirect()->route("profile.edit.photo")->with('toast', ['icon' => "success", "title"=> "user information is updated"]);;
 
     }
+
+    public function updateInfo(Request $request){
+
+        $request->validate([
+            "phone" => 'required|max:15',
+            "address" => "required|max:300"
+        ]);
+
+        $currentUser = User::find(Auth::id());
+        $currentUser->phone = $request->phone;
+        $currentUser->address = $request->address;
+        $currentUser->save();
+        // return $currentUser;
+        return redirect()->back()->with('toast', ['icon' => "success", "title"=> "user information is updated"]);
+    }
+
 
 }

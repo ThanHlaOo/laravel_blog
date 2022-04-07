@@ -64,7 +64,7 @@
                     <div id="search" class="mb-5">
                         <form action="{{route('index')}}">
                             <div class="d-flex search-box">
-                                <input type="text" name="search" value="{{request()->search}}" class="form-control flex-shrink-1 me-2 search-input" placeholder="Search Anything">
+                                <input type="text" name="search" value="{{request()->search}}" required class="form-control flex-shrink-1 me-2 search-input" placeholder="Search Anything">
                                 <button class="btn btn-primary search-btn" >
                                     <i class="feather-search d-block d-xl-none"></i>
                                     <span class="d-none d-xl-block">Search</span>
