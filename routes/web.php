@@ -6,7 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserManagerController;
-
+use App\Http\Controllers\FbController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,3 +57,6 @@ Route::prefix('dashboard')->middleware(['auth', 'is_suspended'])->group(function
 
 
 });
+Route::get('auth/facebook', [FbController::class, 'redirectToFacebook'])->name("facebookRedirect");
+
+Route::get('auth/facebook/callback', [FbController::class, 'facebookSignin'])->name("callback");
