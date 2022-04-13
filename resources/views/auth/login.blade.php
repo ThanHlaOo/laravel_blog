@@ -46,7 +46,16 @@
                                     <label class="custom-control-label text-muted" for="termsCheckbox"> Remember me</label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-lg btn-block btn-primary">Sign in</button>
+                            <!-- <button type="submit" class="btn btn-lg btn-block btn-primary">Sign in</button> -->
+                            <div class="mb-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-primary me-3">
+                                        {{ __('Login') }}
+                                    </button>
+
+                                    <a href="{{route('facebookRedirect')}}" class="btn btn-outline-primary">Login With Facebook</a>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
